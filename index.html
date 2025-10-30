@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Соня и Сильвер: Приключения в пижаме и шерсти</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<style>
+    /* Базовые стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #ff6b8b;
+    --secondary: #7ec4cf;
+    --accent: #ffd166;
+    --dark: #2a2d43;
+    --light: #f9f7fe;
+    --text: #333333;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background-color: var(--light);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Герой секция */
+.hero {
+    height: 100vh;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white" opacity="0.1"><circle cx="50" cy="50" r="2"/></svg>') repeat;
+    animation: float 20s infinite linear;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.hero-title {
+    font-family: 'Comic Neue', cursive;
+    font-size: clamp(3rem, 8vw, 6rem);
+    margin-bottom: 1rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.hero-subtitle {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+}
+
+.scroll-indicator span {
+    font-size: 2rem;
+    color: white;
+}
+
+/* Секции */
+.section {
+    padding: 80px 0;
+}
+
+.section:nth-child(even) {
+    background-color: white;
+}
+
+.section-title {
+    font-family: 'Comic Neue', cursive;
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 3rem;
+    color: var(--dark);
+}
+
+#sonya .section-title {
+    color: var(--primary);
+}
+
+#silver .section-title {
+    color: var(--secondary);
+}
+
+/* Галерея */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.gallery-item {
+    perspective: 1000px;
+}
+
+.photo-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.photo-card:hover {
+    transform: translateY(-10px) rotate(1deg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.photo {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.photo-card:hover .photo {
+    transform: scale(1.05);
+}
+
+.photo-caption {
+    padding: 20px;
+    font-family: 'Comic Neue', cursive;
+    font-size: 1.1rem;
+    text-align: center;
+    background: var(--light);
+    color: var(--dark);
+    border-top: 3px solid;
+}
+
+#sonya .photo-caption {
+    border-color: var(--primary);
+}
+
+#silver .photo-caption {
+    border-color: var(--secondary);
+}
+
+/* Футер */
+.footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+    font-family: 'Comic Neue', cursive;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .hero {
+        height: 70vh;
+        padding: 0 20px;
+    }
+    
+    .section {
+        padding: 50px 0;
+    }
+    
+    .gallery {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .photo {
+        height: 250px;
+    }
+    
+    .photo-card:hover {
+        transform: none;
+    }
+    
+    .photo-card:active {
+        transform: scale(0.98);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .photo-caption {
+        padding: 15px;
+        font-size: 1rem;
+    }
+}
+
+/* Дополнительные анимации */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gallery-item:nth-child(odd) .photo-card {
+    animation-delay: 0.1s;
+}
+
+.gallery-item:nth-child(even) .photo-card {
+    animation-delay: 0.2s;
+}
+</style>
+
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Моя любимая Соня и её пупсик Сильвер</h1>
+            <p class="hero-subtitle">История о девочке, которая думала, что она хозяйка кота, а на самом деле кот был её хозяином.</p>
+        </div>
+        <div class="scroll-indicator">
+            <span>↓</span>
+        </div>
+    </header>
+
+    <main>
+        <section class="section" id="sonya">
+            <div class="container">
+                <h2 class="section-title">Поня: Любит пукать, рыгать и Сильвера.</h2>
+                <div class="gallery">
+                    <!-- Фото 1 -->
+                    <div class="gallery-item">
+                        <div class="photo-card">
+                            <img src="Images\photo_2025-09-06_00-43-38.jpg" alt="Соня" class="photo">
+                            <div class="photo-caption">"Русиная деочка"</div>
+                        </div>
+                    </div>
+                    <!-- Фото 2 -->
+                    <div class="gallery-item">
+                        <div class="photo-card">
+                            <img src="Images\photo_2025-10-14_00-34-07.jpg" alt="Соня" class="photo">
+                            <div class="photo-caption">"Фары слепят"</div>
+                        </div>
+                    </div>
+                    <!-- Фото 3 -->
+                    <div class="gallery-item">
+                        <div class="photo-card">
+                            <img src="Images\photo_2025-10-16_14-18-56.jpg" alt="Соня" class="photo">
+                            <div class="photo-caption">"Понячий взгляд"</div>
+                        </div>
+                    </div>
+                    <!-- Фото 4 -->
+                    <div class="gallery-item">
+                        <div class="photo-card">
+                            <img src="Images\photo_2025-10-18_16-58-19.jpg" alt="Соня" class="photo">
+                            <div class="photo-caption">"Мили поня"</div>
+                        </div>
+                    </div>
+                    <!-- Фото 5 -->
+                    <div class="gallery-item">
+                        <div class="photo-card">
+                            <img src="Images\photo_2025-10-25_00-37-28.jpg" alt="Соня" class="photo">
+                            <div class="photo-caption">"Секси поня"</div>
+                        </div>
+                    </div>
+                    <!-- Фото 6 -->
+                    <div class="gallery-item">
+                        <div class="photo-card">
+                            <img src="Images\photo_2025-10-06_23-43-06.jpg" alt="Соня" class="photo">
+                            <div class="photo-caption">"Поня с пультом от телевизора"</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="silver">
+            <div class="container">
+                <h2 class="section-title">Сильвер: пушистый гандон</h2>
+                <div class="gallery">
+                    <!-- Фото 1 -->
+                    <div class="gallery-item">
+                        <div class="photo-card">
+                            <img src="Images\photo_2025-10-28_20-28-22.jpg" alt="Сильвер" class="photo">
+                            <div class="photo-caption">"Пиздец"</div>
+                        </div>
+                    </div>
+                    <!-- Фото 2 -->
+                    <div class="gallery-item">
+                        <div class="photo-card">
+                            <img src="Images\photo_2025-10-30_17-13-44.jpg" alt="Сильвер" class="photo">
+                            <div class="photo-caption">"Школьник"</div>
+                        </div>
+                    </div>
+                    <!-- Фото 3 -->
+                    <div class="gallery-item">
+                        <div class="photo-card">
+                            <img src="Images\photo_2025-10-31_00-00-26.jpg" alt="Сильвер" class="photo">
+                            <div class="photo-caption">"GANDON"</div>
+                        </div>
+                    </div>
+                    <!-- Фото 4 -->
+                    <div class="gallery-item">
+                        <div class="photo-card">
+                            <img src="Images\photo_2025-10-30_17-13-45.jpg" alt="Сильвер" class="photo">
+                            <div class="photo-caption">"Школьник"</div>
+                        </div>
+                    </div>
+                    <!-- Фото 5 -->
+                    <div class="gallery-item">
+                        <div class="photo-card">
+                            <img src="Images\photo_2025-10-30_17-13-43.jpg" alt="Сильвер" class="photo">
+                            <div class="photo-caption">"Сливер"</div>
+                        </div>
+                    </div>
+                    <!-- Фото 6 -->
+                    <div class="gallery-item">
+                        <div class="photo-card">
+                            <img src="Images\photo_2025-10-10_12-58-43.jpg" alt="Сильвер" class="photo">
+                            <div class="photo-caption">"Срет на стуле"</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Ебейший сайт про поню и сильвера.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Простая анимация появления элементов при скролле
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        // Наблюдаем за карточками с фото
+        document.addEventListener('DOMContentLoaded', () => {
+            const photoCards = document.querySelectorAll('.photo-card');
+            photoCards.forEach(card => {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(30px)";
+                card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>ё
